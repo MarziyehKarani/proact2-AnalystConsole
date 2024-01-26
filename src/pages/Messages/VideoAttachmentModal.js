@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Modal, Row, Col, Audio } from "reactstrap";
 import { LoadingSpinner } from "../../components/Common/LoadingSpinner";
-import { aquireAccessToken } from "../../infrastructure/azure/aquireAccessToken";
+import AcquireAccessToken from "../../infrastructure/azure/AcquireAccessToken";
 import getAttachmentSasUriApi from "../../infrastructure/services/network/apiCalls/getAttachmentSasUriApi";
 import { apiErrorToast } from "../../components/Common/apiErrorToast";
 
@@ -15,7 +15,7 @@ export const VideoAttachmentModal = ({ isOpen, closeCallback, attachment, messag
         }
     }, [isOpen]);
 
-    aquireAccessToken(() => { });
+    AcquireAccessToken(() => { });
 
     function LoadUrl() {
         if (messageId) {

@@ -12,7 +12,7 @@ import { BooleanCell, DateCell, MessageBodyCell } from "../../components/Common/
 import { map } from "lodash";
 import { LoadingSpinner } from "../../components/Common/LoadingSpinner";
 import { PatientsListPlaceholder } from "../../components/Common/Placeholders";
-import { aquireAccessToken } from "../../infrastructure/azure/aquireAccessToken";
+import AcquireAccessToken from "../../infrastructure/azure/AcquireAccessToken";
 import { apiErrorToast } from "../../components/Common/apiErrorToast";
 import AuthorizedPage from "../../components/Common/AuthorizedPage";
 import {
@@ -38,7 +38,7 @@ const Messages = (props) => {
     const [selectedPatientId, setSelectedPatientId] = useState("");
     const [csvIsDownloading, setCsvIsDownloading] = useState();
 
-    aquireAccessToken(LoadPatients);
+    AcquireAccessToken(LoadPatients);
 
     function LoadPatients() {
         getPatientsApi(projectId, onGetPatientsApiSuccess, apiErrorToast);

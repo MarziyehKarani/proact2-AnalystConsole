@@ -7,7 +7,7 @@ import getStudiesApi from "../../infrastructure/services/network/apiCalls/getStu
 import { setApiAuthToken } from "../../infrastructure/services/network/networkApiConfig"
 import { LoadingSpinner } from "../../components/Common/LoadingSpinner";
 
-import { aquireAccessToken } from "../../infrastructure/azure/aquireAccessToken";
+import AcquireAccessToken from "../../infrastructure/azure/AcquireAccessToken";
 import { apiErrorToast } from "../../components/Common/apiErrorToast";
 import AuthorizedPage from "../../components/Common/AuthorizedPage";
 
@@ -23,7 +23,7 @@ const Studies = (props) => {
 
     const [studies, setStudies] = useState();
 
-    aquireAccessToken(loadStudies);
+    AcquireAccessToken(loadStudies);
 
     function loadStudies() {
         getStudiesApi(onApiSucccessResultCallback, apiErrorToast);

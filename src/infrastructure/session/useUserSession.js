@@ -2,7 +2,7 @@ import React from 'react';
 import { ReactSession } from 'react-client-session';
 import { apiErrorToast } from '../../components/Common/apiErrorToast';
 import UserRoles from './UserRoles';
-import { aquireAccessToken } from '../azure/aquireAccessToken';
+import AcquireAccessToken from '../azure/AcquireAccessToken';
 import getCurrentUserDetailsApi from '../services/network/apiCalls/getCurrentUserDetailsApi';
 import { useState, useEffect } from 'react';
 import { Redirect } from "react-router-dom";
@@ -10,7 +10,7 @@ import { Redirect } from "react-router-dom";
 const useUserSession = () => {
     const [userSession, setUserSession] = useState(null);
 
-    aquireAccessToken(loadCurrentUserData);
+    AcquireAccessToken(loadCurrentUserData);
 
     function loadCurrentUserData() {
         const userProfileStr = ReactSession.get("userProfile");
