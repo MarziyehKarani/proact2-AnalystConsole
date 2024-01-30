@@ -21,7 +21,7 @@ import { MessageDetailPlaceholder, AnalysisDetailPlaceholder } from "../../compo
 import { AnalysisDetail } from "../../components/Common/Analysis";
 import { AddAnalysisModal } from "./AddAnalysisModal";
 import { VideoAttachmentModal } from "./VideoAttachmentModal";
-import AcquireAccessToken from "../../infrastructure/azure/AcquireAccessToken";
+import {AcquireAccessToken} from "../../infrastructure/azure/AcquireAccessToken";
 import { apiErrorToast } from "../../components/Common/apiErrorToast";
 import AuthorizedPage from "../../components/Common/AuthorizedPage";
 import {

@@ -5,45 +5,40 @@ import { protectedResources } from "./azureB2cConfig";
 
 import { setApiAuthToken } from "../services/network/networkApiConfig";
 
-const AcquireAccessToken = ({ onTokenAquiredCallBack }) => {
+export const AcquireAccessToken = (onTokenAquiredCallBack) => {
+
     const { instance, accounts, inProgress } = useMsal();
     const account = useAccount(accounts[0] || {});
 
-    useEffect(() => {
-        const fetchAccessToken = async () => {
-            try {
-                if (account && inProgress === "none") {
-                    const response = await instance.acquireTokenSilent({
-                        scopes: protectedResources.api.scopes,
-                        account: account
-                    });
-                    accessTokenAquireHandler(response.accessToken);
-                }
-            } catch (error) {
-                if (error instanceof InteractionRequiredAuthError) {
-                    try {
-                        if (account && inProgress === "none") {
-                            const response = await instance.acquireTokenPopup({
-                                scopes: protectedResources.api.scopes,
-                            });
-                            accessTokenAquireHandler(response.accessToken);
-                        }
-                    } catch (error) {
-                        console.log(error);
-                    }
-                }
-            }
-        };
-
-        fetchAccessToken();
-    }, [account, inProgress, instance]);
-
-    const accessTokenAquireHandler = (accessToken) => {
+    function accessTokenAquireHandler(accessToken) {
         setApiAuthToken(accessToken);
         onTokenAquiredCallBack();
-    };
+    }
 
-    //return null; // or you can return any JSX if needed
-};
+    useEffect(() => {
+        if (account && inProgress === "none") {
+            instance.acquireTokenSilent({
+                scopes: protectedResources.api.scopes,
+                account: account
+            }).then((response) => {
 
-export default AcquireAccessToken;
+                accessTokenAquireHandler(response.accessToken);
+
+            }).catch((error) => {
+                // in case if silent token acquisition fails, fallback to an interactive method
+                if (error instanceof InteractionRequiredAuthError) {
+                    if (account && inProgress === "none") {
+                        instance.acquireTokenPopup({
+                            scopes: protectedResources.api.scopes,
+                        }).then((response) => {
+
+                            accessTokenAquireHandler(response.accessToken);
+
+                        }).catch(error => console.log(error));
+                    }
+                }
+            });
+        }
+
+    }, [account, inProgress, instance]);
+}

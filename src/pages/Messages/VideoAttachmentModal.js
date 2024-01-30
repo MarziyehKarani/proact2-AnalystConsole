@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Modal, Row, Col, Audio } from "reactstrap";
 import { LoadingSpinner } from "../../components/Common/LoadingSpinner";
-import AcquireAccessToken from "../../infrastructure/azure/AcquireAccessToken";
+import {AcquireAccessToken} from "../../infrastructure/azure/AcquireAccessToken";
 import getAttachmentSasUriApi from "../../infrastructure/services/network/apiCalls/getAttachmentSasUriApi";
 import { apiErrorToast } from "../../components/Common/apiErrorToast";
 

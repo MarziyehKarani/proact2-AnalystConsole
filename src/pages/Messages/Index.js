@@ -12,7 +12,7 @@ import { BooleanCell, DateCell, MessageBodyCell } from "../../components/Common/
 import { map } from "lodash";
 import { LoadingSpinner } from "../../components/Common/LoadingSpinner";
 import { PatientsListPlaceholder } from "../../components/Common/Placeholders";
-import AcquireAccessToken from "../../infrastructure/azure/AcquireAccessToken";
+import {AcquireAccessToken} from "../../infrastructure/azure/AcquireAccessToken";
 import { apiErrorToast } from "../../components/Common/apiErrorToast";
 import AuthorizedPage from "../../components/Common/AuthorizedPage";
 import {

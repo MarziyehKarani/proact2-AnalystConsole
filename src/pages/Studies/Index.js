@@ -7,7 +7,7 @@ import getStudiesApi from "../../infrastructure/services/network/apiCalls/getStu
 import { setApiAuthToken } from "../../infrastructure/services/network/networkApiConfig"
 import { LoadingSpinner } from "../../components/Common/LoadingSpinner";
 
-import AcquireAccessToken from "../../infrastructure/azure/AcquireAccessToken";
+import {AcquireAccessToken} from "../../infrastructure/azure/AcquireAccessToken";
 import { apiErrorToast } from "../../components/Common/apiErrorToast";
 import AuthorizedPage from "../../components/Common/AuthorizedPage";
 

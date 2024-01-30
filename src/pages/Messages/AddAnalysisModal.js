@@ -4,7 +4,7 @@ import { Modal, Row, Col } from "reactstrap";
 import { map } from "lodash";
 import getLexiconApi from "../../infrastructure/services/network/apiCalls/getLexiconApi";
 import { LoadingSpinner } from "../../components/Common/LoadingSpinner";
-import AcquireAccessToken from "../../infrastructure/azure/AcquireAccessToken";
+import {AcquireAccessToken} from "../../infrastructure/azure/AcquireAccessToken";
 import { apiErrorToast } from "../../components/Common/apiErrorToast";
 import { SingleSelect, MultipleSelect } from "../../components/Common/Select";
 import { ErrorMessageAlert } from "../../components/Common/MessageAlert";
