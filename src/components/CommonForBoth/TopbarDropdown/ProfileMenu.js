@@ -27,10 +27,12 @@ const ProfileMenu = props => {
   const { instance, accounts } = useMsal();
   const [profileImage, setProfileImage] = useState(user4);
   const userSession = useUserSession();
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     if (userSession) {
       setProfileImage(userSession.avatarUrl);
+      setUserName(userSession.name);
     }
   }, [userSession]);
 
@@ -63,7 +65,7 @@ const ProfileMenu = props => {
               src={profileImage}
               alt="Header Avatar"
             />
-            <span className="d-none d-xl-inline-block ms-1 fw-medium font-size-15">{accounts != null && accounts.length > 0 ? accounts[0].name : ""}</span>{" "}
+            <span className="d-none d-xl-inline-block ms-1 fw-medium font-size-15">{userName}</span>{" "}
             <i className="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
           </DropdownToggle>
           <DropdownMenu className="dropdown-menu-end">
