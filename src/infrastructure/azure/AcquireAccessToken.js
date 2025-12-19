@@ -5,7 +5,7 @@ import { protectedResources } from "./azureB2cConfig";
 
 import { setApiAuthToken } from "../services/network/networkApiConfig";
 
-export const AcquireAccessToken = (onTokenAquiredCallBack) => {
+export const aquireAccessToken = (onTokenAquiredCallBack) => {
 
     const { instance, accounts, inProgress } = useMsal();
     const account = useAccount(accounts[0] || {});
