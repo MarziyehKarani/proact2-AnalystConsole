@@ -4,12 +4,12 @@ import { Modal, Row, Col } from "reactstrap";
 import { map } from "lodash";
 import getLexiconApi from "../../infrastructure/services/network/apiCalls/getLexiconApi";
 import { LoadingSpinner } from "../../components/Common/LoadingSpinner";
-import {AcquireAccessToken} from "../../infrastructure/azure/AcquireAccessToken";
+import { aquireAccessToken } from "../../infrastructure/azure/aquireAccessToken";
 import { apiErrorToast } from "../../components/Common/apiErrorToast";
 import { SingleSelect, MultipleSelect } from "../../components/Common/Select";
 import { ErrorMessageAlert } from "../../components/Common/MessageAlert";
 import postMessageAnalysisApi from "../../infrastructure/services/network/apiCalls/postMessageAnalysisApi";
-import { success } from "toastr";
+
 
 function GroupLexiconCategoryLabels(labels) {
 
@@ -47,7 +47,7 @@ export const AddAnalysisModal = ({ props, isOpen, closeCallback, addAnalysisSucc
     const [selectedLabelsMap, setSelectedLabelsMap] = useState(new Map());
     const [isValidationErrorVisible, setValidationErrorVisible] = useState(false);
 
-    AcquireAccessToken(loadLexicon);
+    aquireAccessToken(loadLexicon);
 
     function loadLexicon() {
         getLexiconApi(studyId, onLoadLexiconSuccess, apiErrorToast);
@@ -93,8 +93,8 @@ export const AddAnalysisModal = ({ props, isOpen, closeCallback, addAnalysisSucc
     function addNewAnalysis() {
         const request = prepareRequestBody();
         console.log(request);
-        ValidateRequest(request);
-        if (!isValidationErrorVisible) {
+        var isValid = ValidateRequest(request);
+        if (isValid) {
             postMessageAnalysisApi(request, addAnalysisSuccessHandler, apiErrorToast);
         }
     }
@@ -108,10 +108,12 @@ export const AddAnalysisModal = ({ props, isOpen, closeCallback, addAnalysisSucc
 
     function ValidateRequest(request) {
         setValidationErrorVisible(request.analysisResults.length == 0);
+        return request.analysisResults.length > 0;
     }
 
     function closeModalHandler() {
         setSelectedLabelsMap(new Map());
+        setValidationErrorVisible(false);
         closeCallback();
     }
 
