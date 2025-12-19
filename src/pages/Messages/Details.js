@@ -21,7 +21,7 @@ import { MessageDetailPlaceholder, AnalysisDetailPlaceholder } from "../../compo
 import { AnalysisDetail } from "../../components/Common/Analysis";
 import { AddAnalysisModal } from "./AddAnalysisModal";
 import { VideoAttachmentModal } from "./VideoAttachmentModal";
-import {AcquireAccessToken} from "../../infrastructure/azure/AcquireAccessToken";
+import {aquireAccessToken} from "../../infrastructure/azure/aquireAccessToken";
 import { apiErrorToast } from "../../components/Common/apiErrorToast";
 import AuthorizedPage from "../../components/Common/AuthorizedPage";
 import {
@@ -48,7 +48,7 @@ const MessageDetails = (props) => {
     const [isAnalystConsoleActive, setAnalystConsoleActive] = useState(false);
     const [isAnalysisLoading, setAnalysisLoading] = useState(true);
 
-    AcquireAccessToken(accessTokenAquiredHandler);
+    aquireAccessToken(accessTokenAquiredHandler);
 
     function accessTokenAquiredHandler() {
         loadMessageDetails();

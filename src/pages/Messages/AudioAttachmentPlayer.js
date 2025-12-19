@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Row, Col } from "reactstrap";
 import { LoadingSpinner } from "../../components/Common/LoadingSpinner";
-import AcquireAccessToken from "../../infrastructure/azure/AcquireAccessToken";
+import aquireAccessToken from "../../infrastructure/azure/aquireAccessToken";
 import getAttachmentSasUriApi from "../../infrastructure/services/network/apiCalls/getAttachmentSasUriApi";
 import { apiErrorToast } from "../../components/Common/apiErrorToast";
 
