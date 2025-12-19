@@ -1,11 +1,11 @@
 import { LogLevel } from "@azure/msal-browser";
 
 const devEnvironment = {
-    clientId: "6376e7f4-1656-4340-b330-342ef88b2244",
-    signinUserFlow: "B2C_1_EngitelDevProact",
-    domain: "devetproactb2c.b2clogin.com",
-    loginEndpoint: "https://devetproactb2c.b2clogin.com/devetproactb2c.onmicrosoft.com/B2C_1_EngitelDevProact",
-    scopes: ["https://devetproactb2c.onmicrosoft.com/5640d05e-b6cb-4aac-a235-611db24fd6f3/Api.Scope"]
+    clientId: "",
+    signinUserFlow: "",
+    domain: "",
+    loginEndpoint: "",
+    scopes: ""
 }
 
 const prodEnvironment = {
@@ -13,26 +13,26 @@ const prodEnvironment = {
     signinUserFlow: "",
     domain: "",
     loginEndpoint: "",
-    scopes: [""]
+    scopes: ""
 }
 
 
 export const b2cPolicies = {
     names: {
-        signUpSignIn: devEnvironment.signinUserFlow
+        signUpSignIn: process.env.REACT_APP_SIGNINUSERFLOW
     },
     authorities: {
         signUpSignIn: {
-            authority: devEnvironment.loginEndpoint
+            authority: process.env.REACT_APP_LOGINENDPOINT
         }
     },
-    authorityDomain: devEnvironment.domain
+    authorityDomain: process.env.REACT_APP_DOMAIN
 }
 
 
 export const msalConfig = {
     auth: {
-        clientId: devEnvironment.clientId,
+        clientId: process.env.REACT_APP_CLIENTID,
         authority: b2cPolicies.authorities.signUpSignIn.authority,
         knownAuthorities: [b2cPolicies.authorityDomain], // Mark your B2C tenant's domain as trusted.
         redirectUri: "/", // You must register this URI on Azure Portal/App Registration. Defaults to window.location.origin
@@ -70,7 +70,7 @@ export const msalConfig = {
 
 export const protectedResources = {
     api: {
-        scopes: devEnvironment.scopes
+        scopes: process.env.REACT_APP_SCOPES.split(", ")
     },
 }
 

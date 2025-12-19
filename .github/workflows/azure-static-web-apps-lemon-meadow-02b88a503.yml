@@ -4,10 +4,20 @@ on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
+      - dev
+
+env: 
+      REACT_APP_CLIENTID : ${{ vars.REACT_APP_CLIENTID }}
+      REACT_APP_SIGNINUSERFLOW : ${{ vars.REACT_APP_SIGNINUSERFLOW }}
+      REACT_APP_DOMAIN : ${{ vars.REACT_APP_DOMAIN }}
+      REACT_APP_LOGINENDPOINT : ${{ vars.REACT_APP_LOGINENDPOINT }}
+      REACT_APP_SCOPES : ${{ vars.REACT_APP_SCOPES }}
+      REACT_APP_APIENDPOINT : ${{ vars.REACT_APP_APIENDPOINT }}
 
 jobs:
   build_and_deploy_job:
@@ -23,6 +33,7 @@ jobs:
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
+          production_branch: "main"
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_LEMON_MEADOW_02B88A503 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"

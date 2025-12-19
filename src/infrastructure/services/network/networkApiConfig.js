@@ -1,20 +1,13 @@
 import axios from "axios";
 
 function getDevEvironment() {
-    // return "https://devproactservices.azurewebsites.net/api";
-     return "https://devetproactservices.azurewebsites.net/api";
- }
-
-/* function getDevEvironment() {
-    return "https://localhost:44378/api";
-}  */
+}
 
 function getProdEnvironment() {
-    return "https://prodproactservices.azurewebsites.net/api";
 }
 
 export function setupApiConfiguration(languageTag) {
-    var environmentBaseUrl = getDevEvironment();
+    var environmentBaseUrl = process.env.REACT_APP_APIENDPOINT;
     axios.defaults.baseURL = `${environmentBaseUrl}/${languageTag}/`;
 }
 
